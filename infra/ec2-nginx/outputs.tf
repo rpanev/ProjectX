@@ -67,3 +67,45 @@ output "security_group_ec2_id" {
   description = "ID of the EC2 security group"
   value       = module.security_groups.ec2_security_group_id
 }
+
+# VPC Outputs
+output "vpc_id" {
+  description = "ID of the VPC"
+  value       = module.vpc.vpc_id
+}
+
+output "public_subnets" {
+  description = "IDs of public subnets"
+  value       = module.vpc.public_subnets
+}
+
+output "private_subnets" {
+  description = "IDs of private subnets"
+  value       = module.vpc.private_subnets
+}
+
+# VPC Endpoints Outputs
+output "vpc_endpoint_s3_id" {
+  description = "ID of the S3 VPC Gateway Endpoint"
+  value       = module.vpc.s3_endpoint_id
+}
+
+output "vpc_endpoint_ssm_id" {
+  description = "ID of the SSM VPC Interface Endpoint"
+  value       = module.vpc.ssm_endpoint_id
+}
+
+output "vpc_endpoint_ssmmessages_id" {
+  description = "ID of the SSM Messages VPC Interface Endpoint"
+  value       = module.vpc.ssmmessages_endpoint_id
+}
+
+output "vpc_endpoint_ec2messages_id" {
+  description = "ID of the EC2 Messages VPC Interface Endpoint"
+  value       = module.vpc.ec2messages_endpoint_id
+}
+
+output "vpc_endpoints_security_group_id" {
+  description = "ID of the security group for VPC endpoints"
+  value       = module.vpc.vpc_endpoints_security_group_id
+}

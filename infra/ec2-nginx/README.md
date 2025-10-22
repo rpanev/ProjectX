@@ -74,8 +74,16 @@
 | <a name="output_iam_role_name"></a> [iam\_role\_name](#output\_iam\_role\_name) | Name of the IAM role for EC2 instances |
 | <a name="output_instance_ids"></a> [instance\_ids](#output\_instance\_ids) | IDs of running EC2 instances in the ASG |
 | <a name="output_instance_private_ips"></a> [instance\_private\_ips](#output\_instance\_private\_ips) | Private IP addresses of running EC2 instances |
+| <a name="output_private_subnets"></a> [private\_subnets](#output\_private\_subnets) | IDs of private subnets |
+| <a name="output_public_subnets"></a> [public\_subnets](#output\_public\_subnets) | IDs of public subnets |
 | <a name="output_security_group_alb_id"></a> [security\_group\_alb\_id](#output\_security\_group\_alb\_id) | ID of the ALB security group |
 | <a name="output_security_group_ec2_id"></a> [security\_group\_ec2\_id](#output\_security\_group\_ec2\_id) | ID of the EC2 security group |
 | <a name="output_ssm_connect_command"></a> [ssm\_connect\_command](#output\_ssm\_connect\_command) | AWS SSM command to connect to instances |
 | <a name="output_target_group_arn"></a> [target\_group\_arn](#output\_target\_group\_arn) | ARN of the target group |
+| <a name="output_vpc_endpoint_ec2messages_id"></a> [vpc\_endpoint\_ec2messages\_id](#output\_vpc\_endpoint\_ec2messages\_id) | ID of the EC2 Messages VPC Interface Endpoint |
+| <a name="output_vpc_endpoint_s3_id"></a> [vpc\_endpoint\_s3\_id](#output\_vpc\_endpoint\_s3\_id) | ID of the S3 VPC Gateway Endpoint |
+| <a name="output_vpc_endpoint_ssm_id"></a> [vpc\_endpoint\_ssm\_id](#output\_vpc\_endpoint\_ssm\_id) | ID of the SSM VPC Interface Endpoint |
+| <a name="output_vpc_endpoint_ssmmessages_id"></a> [vpc\_endpoint\_ssmmessages\_id](#output\_vpc\_endpoint\_ssmmessages\_id) | ID of the SSM Messages VPC Interface Endpoint |
+| <a name="output_vpc_endpoints_security_group_id"></a> [vpc\_endpoints\_security\_group\_id](#output\_vpc\_endpoints\_security\_group\_id) | ID of the security group for VPC endpoints |
+| <a name="output_vpc_id"></a> [vpc\_id](#output\_vpc\_id) | ID of the VPC |
 <!-- END_TF_DOCS -->

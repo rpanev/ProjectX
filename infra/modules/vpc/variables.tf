@@ -24,10 +24,6 @@ variable "private_subnet_cidrs" {
   type = list(string)
 }
 
-variable "endpoint_sg_id" {
-  type = string
-}
-
 variable "flow_log_bucket_arn" {
   description = "S3 bucket ARN for VPC flow logs"
   type        = string
