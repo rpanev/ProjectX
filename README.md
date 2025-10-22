@@ -1,6 +1,6 @@
 # ProjectX - EC2 Nginx Application
 
-Infrastructure as Code project using Packer, Ansible, Terraform, and Terragrunt to deploy a scalable Nginx application on AWS.
+Infrastructure as Code project using Packer, Ansible, Terraform, and Makefile to deploy a scalable Nginx application on AWS.
 
 ## Architecture
 
@@ -39,7 +39,9 @@ DevOps-Project/
 ### Step 1: Deploy Backend
 
 Create S3 bucket and DynamoDB table for Terraform state:
+## License
 
+This project is for educational purposes.
 ```bash
 make deploy-backend
 ```
@@ -73,7 +75,9 @@ curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/linux_64b
 
 # Install
 sudo dnf install -y session-manager-plugin.rpm
+## License
 
+This project is for educational purposes.
 # Verify
 session-manager-plugin
 ```
