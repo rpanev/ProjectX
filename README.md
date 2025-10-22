@@ -7,7 +7,6 @@ Infrastructure as Code project using Packer, Ansible, Terraform, and Makefile to
 - **Packer**: Builds AMI with Nginx (Pack/Fry pattern)
 - **Ansible**: Configures Nginx and runtime scripts
 - **Terraform**: Provisions AWS infrastructure (VPC, ALB, ASG, etc.)
-- **Terragrunt**: DRY wrapper for Terraform configurations
 - **Helm**: Kubernetes deployment charts (optional)
 
 ## Project Structure
