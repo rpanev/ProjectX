@@ -1,0 +1,4 @@
+---
+# Default variables for fry role
+fry_config_path: /opt/fry
+metadata_path: /var/lib/fry

@@ -1,0 +1,43 @@
+#!/bin/bash
+# Fry configuration script - runs at instance boot
+# This script processes userdata and applies runtime configuration
+
+set -e
+
+METADATA_PATH="{{ metadata_path }}"
+LOG_FILE="/var/log/fry-config.log"
+
+log() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" | tee -a "$LOG_FILE"
+}
+
+log "Starting fry configuration..."
+
+# Fetch instance metadata
+INSTANCE_ID=$(ec2-metadata --instance-id | cut -d " " -f 2)
+AVAILABILITY_ZONE=$(ec2-metadata --availability-zone | cut -d " " -f 2)
+LOCAL_IPV4=$(ec2-metadata --local-ipv4 | cut -d " " -f 2)
+
+log "Instance ID: $INSTANCE_ID"
+log "Availability Zone: $AVAILABILITY_ZONE"
+log "Local IPv4: $LOCAL_IPV4"
+
+# Save metadata
+cat > "$METADATA_PATH/instance-info.txt" <<EOF
+INSTANCE_ID=$INSTANCE_ID
+AVAILABILITY_ZONE=$AVAILABILITY_ZONE
+LOCAL_IPV4=$LOCAL_IPV4
+BOOT_TIME=$(date '+%Y-%m-%d %H:%M:%S')
+EOF
+
+# Process userdata if available
+if [ -f /opt/fry/process-userdata.sh ]; then
+    log "Processing userdata..."
+    /opt/fry/process-userdata.sh
+fi
+
+# Restart nginx to apply any configuration changes
+log "Restarting nginx..."
+systemctl restart nginx
+
+log "Fry configuration completed successfully"

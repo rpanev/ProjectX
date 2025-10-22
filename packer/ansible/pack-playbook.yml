@@ -1,0 +1,6 @@
+---
+- name: Pack Phase - Bake AMI with Nginx
+  hosts: all
+  become: yes
+  roles:
+    - pack

@@ -1,0 +1,44 @@
+---
+# Fry role - Prepare for runtime configuration via userdata
+- name: Create fry configuration script
+  ansible.builtin.template:
+    src: fry-config.sh.j2
+    dest: /opt/fry/fry-config.sh
+    owner: root
+    group: root
+    mode: '0755'
+  become: yes
+
+- name: Create systemd service for fry configuration
+  ansible.builtin.template:
+    src: fry-config.service.j2
+    dest: /etc/systemd/system/fry-config.service
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+
+- name: Enable fry-config service
+  ansible.builtin.systemd:
+    name: fry-config.service
+    enabled: yes
+    daemon_reload: yes
+  become: yes
+
+- name: Create directory for instance metadata
+  ansible.builtin.file:
+    path: /var/lib/fry
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  become: yes
+
+- name: Create userdata processing script
+  ansible.builtin.template:
+    src: process-userdata.sh.j2
+    dest: /opt/fry/process-userdata.sh
+    owner: root
+    group: root
+    mode: '0755'
+  become: yes

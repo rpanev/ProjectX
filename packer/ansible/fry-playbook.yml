@@ -1,0 +1,6 @@
+---
+- name: Fry Phase - Prepare for Runtime Configuration
+  hosts: all
+  become: yes
+  roles:
+    - fry

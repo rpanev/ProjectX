@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ app_name }}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 60px;
+            max-width: 800px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        .info-box {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        .info-box h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        .info-box p {
+            color: #555;
+            line-height: 1.6;
+        }
+        .status {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .hostname {
+            font-family: monospace;
+            background: #e9ecef;
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: #495057;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ app_name }}</h1>
+        <p class="subtitle">Powered by Packer, Ansible & Terraform</p>
+        
+        <div class="info-box">
+            <h3>Pack/Fry Architecture</h3>
+            <p><strong>Pack:</strong> AMI baked with Nginx and base configuration</p>
+            <p><strong>Fry:</strong> Runtime configuration via userdata</p>
+        </div>
+        
+        <div class="info-box">
+            <h3>Technology Stack</h3>
+            <p>• <strong>OS:</strong> Amazon Linux 2023</p>
+            <p>• <strong>Web Server:</strong> Nginx</p>
+            <p>• <strong>Environment:</strong> {{ environment }}</p>
+            <p>• <strong>Hostname:</strong> <span class="hostname" id="hostname">Loading...</span></p>
+        </div>
+        
+        <div class="status">Server Running</div>
+    </div>
+    
+    <script>
+        // Display hostname dynamically
+        fetch('/api/hostname')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('hostname').textContent = data;
+            })
+            .catch(() => {
+                document.getElementById('hostname').textContent = window.location.hostname;
+            });
+    </script>
+</body>
+</html>
