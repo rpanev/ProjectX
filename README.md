@@ -12,7 +12,7 @@ Infrastructure as Code project using Packer, Ansible, Terraform, and Makefile to
 ## Project Structure
 
 ```
-DevOps-Project/
+ProjectX/
 ├── packer/              # AMI building with Packer
 │   ├── nginx-ami.pkr.hcl
 │   └── ansible/         # Ansible roles (pack/fry)
@@ -38,9 +38,7 @@ DevOps-Project/
 ### Step 1: Deploy Backend
 
 Create S3 bucket and DynamoDB table for Terraform state:
-## License
 
-This project is for educational purposes.
 ```bash
 make deploy-backend
 ```
