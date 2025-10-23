@@ -9,6 +9,9 @@ azs                  = ["us-east-1a", "us-east-1b"]
 public_subnet_cidrs  = ["10.0.1.0/24", "10.0.2.0/24"]
 private_subnet_cidrs = ["10.0.11.0/24", "10.0.12.0/24"]
 
+# Flow logs bucket ARN
+flow_log_bucket_arn = "arn:aws:s3:::your-flow-logs-bucket" # Update with your S3 bucket ARN
+
 # AMI Configuration
 ami_id = "ami-04e415412e60004dc"  # Update with AMI ID from Packer build
 

@@ -110,6 +110,8 @@ resource "aws_route_table_association" "private" {
 
 # VPC Flow Log to S3
 resource "aws_flow_log" "vpc_flow_log" {
+  # Create VPC Flow Log only if an S3 bucket ARN is provided (not empty string)
+  # If flow_log_bucket_arn is empty, count = 0 and flow logging won't be enabled
   count = var.flow_log_bucket_arn != "" ? 1 : 0
 
   log_destination      = var.flow_log_bucket_arn
