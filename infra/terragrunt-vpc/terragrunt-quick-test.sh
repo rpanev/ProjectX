@@ -1,17 +1,22 @@
 #!/bin/bash
 
-# Script for testing VPC module with VPC Endpoints
+# Script for testing VPC module with VPC Endpoints - DEV Environment
 
 set -e
 
 REGION="eu-west-1"
+ENV="dev"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ENV_DIR="${SCRIPT_DIR}/env/${ENV}"
+
 COLOR_GREEN='\033[0;32m'
 COLOR_BLUE='\033[0;34m'
 COLOR_RED='\033[0;31m'
+COLOR_YELLOW='\033[0;33m'
 COLOR_RESET='\033[0m'
 
 echo -e "${COLOR_BLUE}========================================${COLOR_RESET}"
-echo -e "${COLOR_BLUE}  VPC Module Test Script${COLOR_RESET}"
+echo -e "${COLOR_BLUE}  VPC Module Test Script - ${COLOR_YELLOW}${ENV}${COLOR_BLUE} Environment${COLOR_RESET}"
 echo -e "${COLOR_BLUE}========================================${COLOR_RESET}"
 echo ""
 
@@ -37,12 +42,23 @@ if ! command -v aws &> /dev/null; then
     exit 1
 fi
 
+# Check if env directory exists
+if [ ! -d "$ENV_DIR" ]; then
+    print_error "Environment directory not found: $ENV_DIR"
+    exit 1
+fi
+
+# Change to environment directory
+cd "$ENV_DIR"
+echo "Working directory: $ENV_DIR"
+echo ""
+
 # Step 1: Initialize
-print_step "Step 1: Initializing Terragrunt..."
+print_step "Step 1: Initializing Terragrunt for ${ENV}..."
 terragrunt init
 
 # Step 2: Plan
-print_step "Step 2: Running Terragrunt plan..."
+print_step "Step 2: Running Terragrunt plan for ${ENV}..."
 terragrunt plan -out=tfplan
 
 # Step 3: Ask for confirmation
@@ -54,12 +70,13 @@ if [ "$confirm" != "yes" ]; then
 fi
 
 # Step 4: Apply
-print_step "Step 3: Applying Terragrunt configuration..."
+print_step "Step 3: Applying Terragrunt configuration for ${ENV}..."
 terragrunt apply tfplan
 
 # Step 5: Get outputs
-print_step "Step 4: Getting outputs..."
+print_step "Step 4: Getting outputs for ${ENV}..."
 VPC_ID=$(terragrunt output -raw vpc_id)
+echo "Environment: ${ENV}"
 echo "VPC ID: $VPC_ID"
 
 # Step 6: Verify VPC Endpoints
@@ -99,8 +116,9 @@ aws ec2 describe-route-tables \
 
 echo ""
 echo -e "${COLOR_GREEN}========================================${COLOR_RESET}"
-echo -e "${COLOR_GREEN}  Test completed successfully!${COLOR_RESET}"
+echo -e "${COLOR_GREEN}  Test completed successfully for ${ENV}!${COLOR_RESET}"
 echo -e "${COLOR_GREEN}========================================${COLOR_RESET}"
 echo ""
-echo "To destroy the test environment, run:"
+echo "To destroy the ${ENV} environment, run:"
+echo "  cd ${ENV_DIR}"
 echo "  terragrunt destroy"

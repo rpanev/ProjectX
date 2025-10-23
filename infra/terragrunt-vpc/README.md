@@ -1,0 +1,1 @@
+For quick test you can start terragrunt-quick-test.sh script to build DEV env
